@@ -87,4 +87,4 @@ print(f"AI 猜這張圖是: {prediction} | 實際答案是: {test_target[0].item
 
 plt.imshow(test_data[0].squeeze().cpu().numpy(), cmap='gray')
 plt.title(f"Prediction: {prediction}")
-plt.show()
+plt.show()y
