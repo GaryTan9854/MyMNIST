@@ -1,3 +1,5 @@
+.DS_Store
 env_mnist/
 data/
 __pycache__/
+*.pth
