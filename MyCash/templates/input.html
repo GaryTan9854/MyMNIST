@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>家庭支出追蹤</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: right; /* 金額靠右對齊 */
+}
+th {
+  background-color: #f2f2f2; /* 表頭背景顏色 */
+}
+</style>
+</head>
+<body>
+
+
+<h1>家庭支出追蹤</h1>
+<button onclick="window.location.href='/input'">輸入</button>
+<button onclick="window.location.href='/summary'">總表</button>
+
+<form method="POST">
+  <label for="category">類別:</label>
+  <select name="category" id="category" required>
+    <option value="">選擇類別</option>
+    <option value="Eat and Drink">Eat and Drink</option>
+    <option value="Buy/Spending items">Buy/Spending items</option>
+    <option value="House hold">House hold</option>
+    <option value="家庭成員">家庭成員</option>
+  </select><br><br>
+
+  <label for="item">項目:</label>
+  <select name="item" id="item" required>
+    <option value="">選擇項目</option>
+  </select><br><br>
+
+  <label for="date">日期:</label>
+  <input type="date" name="date" id="date" value="{{ default_date }}" required><br><br>
+  
+  <label for="amount">金額:</label>
+  <input type="number" name="amount" step="0.01" required><br><br>
+
+  <label for="description">描述:</label>
+  <textarea name="description"></textarea><br><br>
+
+  <button type="submit">新增支出</button>
+</form>
+
+<hr>
+
+<h2>支出紀錄</h2>
+<table>
+  <thead>
+    <tr>
+      <th>類別</th>
+      <th>項目</th>
+      <th>日期</th>
+      <th>金額</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for expense in expenses %}
+    <tr>
+      <td>{{ expense.category }}</td>
+      <td>{{ expense.item }}</td>
+      <td>{{ expense.date }}</td>
+      <td>{{ expense.amount }}</td>
+      <td>{{ expense.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  const categories = {
+    "Eat and Drink": ["Breakfast", "Lunch", "Dinner/Supper", "Big Meal", "Routine meal + milk + fruits", "Hair Cut", "Misc", "Groceries"],
+    "Buy/Spending items": ["Small Items / Clothes", "Big Items", "Medical (vitamin 保健品 etc)", "傢俱修繕"],
+    "House hold": ["Rental", "Internet+ Water", "House Mgt Fee+Car Park", "Cleaning", "Electric", "Water", "Gas", "Wash car", "Television + Internet", "Services (KKBox, NetFilx,tidal)"],
+    "家庭成員": ["Yiming", "Jiayu", "Zaotian", "Anna", "Jupiter", "Mer", "Mobile Anna", "Mobile Aaron"],
+    "Insurance": ["Insurance-健保、年金", "Insurance-Life", "Insurance-Car/Motor/House", "Car-Fine, service etc", "Tax"],
+    "RedPacket": ["RedPacket-PT", "RedPacket-Home (Hong, mer, noelle)", "RedPackel-others"],
+    "Gary": ["Mobile Xox", "Allowance", "Leisure/Sports", "Learning", "Travel&BzTraval", "Gifts & others", "應酬"]
+  };
+
+  const categorySelect = document.getElementById('category');
+  const itemSelect = document.getElementById('item');
+
+  categorySelect.addEventListener('change', () => {
+    const selectedCategory = categorySelect.value;
+    itemSelect.innerHTML = '<option value="">選擇項目</option>';
+
+    if (selectedCategory) {
+      categories[selectedCategory].forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.text = item;
+        itemSelect.appendChild(option);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
