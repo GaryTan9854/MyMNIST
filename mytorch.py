@@ -1,11 +1,11 @@
 import time
+import os  # 用來檢查檔案是否存在
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
-import os  # 用來檢查檔案是否存在
 
 # --- 1. 設定與設備 ---
 if torch.backends.mps.is_available():

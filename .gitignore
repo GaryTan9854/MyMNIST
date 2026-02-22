@@ -1,5 +1,5 @@
 .DS_Store
+*.pth
 env_mnist/
 data/
 __pycache__/
-*.pth
