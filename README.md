@@ -1,5 +1,4 @@
 # MyMNIST 辨識專案
-
 這是我第一個使用 PyTorch 與 CNN 構建的手寫數字辨識專案。
 
 ## 功能
@@ -10,3 +9,8 @@
 ## 如何執行
 1. 安裝環境: `pip install torch torchvision matplotlib`
 2. 執行程式: `python mytorch.py`
+3. 辨識自己的手寫數字
+1. 準備一張數字照片並命名為 `test.jpg`。
+2. 執行預測程式：
+   ```bash
+   python predict.py
